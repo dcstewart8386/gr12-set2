@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
+<title>Konva Program</title>
+</head>
+<body>
+<div id="konvaCanvas"></div>
+<script>
+	'use strict'
+
+    let stage = new Konva.Stage({
+        container: 'konvaCanvas',
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    let layer = new Konva.Layer();
+	stage.add(layer); // add the layer to the stage
+
+    //----- Ignore everything above here for now -----//
+
+    // The data structure to hold the state of the scene
+    let sceneData = {
+        backgroundColor: "lightblue",
+        ringXs: [20, 70, 150, 200, 260, 310],
+        stars: [
+            { x: 70, y: 130, color: "red", numPoints: 3 },
+            { x: 110, y: 50, color: "orange", numPoints: 4 },
+            { x: 220, y: 40, color: "yellow", numPoints: 5 },
+            { x: 300, y: 100, color: "green", numPoints: 6 },
+            { x: 350, y: 200, color: "blue", numPoints: 7 },
+        ]
+    }
+
+    // ---- The rendering begins here ----- //
+
+    addGrid(Konva, layer); // comment this line to remove the grid
+
+    // Go through the RingXs array, and render a ring at each x-value in the array
+    // All the y-values will be 400
+    for (let i = 0; i < sceneData.ringXs.length; i++) {
+        var ring = new Konva.Ring({
+            x: sceneData.ringXs[i],
+            y: 400,
+            innerRadius: 5,
+            outerRadius: 20,
+            fill: 'yellow',
+            stroke: 'black',
+            strokeWidth: 1,
+        });
+        layer.add(ring);
+    }
+
+    // Go through the stars array, and render each star object
+    for (let i = 0; i < sceneData.stars.length; i++) {
+        var star = new Konva.Star({
+            x: sceneData.stars[i].x,
+            y: sceneData.stars[i].y,
+            numPoints: sceneData.stars[i].numPoints,
+            innerRadius: 20,
+            outerRadius: 40,
+            fill: sceneData.stars[i].color,
+            stroke: 'black',
+            strokeWidth: 4,
+        });
+        layer.add(star);
+    }
+
+    //----- Ignore everything below here for now -----//
+
+</script>
+</body>
+</html>
