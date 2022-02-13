@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
+<title>Konva Program</title>
+</head>
+<body>
+<div id="konvaCanvas"></div>
+<script>
+	'use strict'
+
+    let stage = new Konva.Stage({
+        container: 'konvaCanvas',
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    let layer = new Konva.Layer();
+	stage.add(layer); // add the layer to the stage
+
+    //----- Ignore everything above here for now -----//
+
+    // Create a data structure here for your scene
+    let sceneData = {
+
+    }
+
+    // ---- Start your rendering here ----- //
+
+    addGrid(Konva, layer); // comment this line to remove the grid
+
+    
+    //----- Ignore everything below here for now -----//
+
+</script>
+</body>
+</html>
