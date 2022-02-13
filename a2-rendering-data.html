@@ -8,7 +8,8 @@
 <body>
 <div id="konvaCanvas"></div>
 <script>
-	
+	'use strict'
+
     let stage = new Konva.Stage({
         container: 'konvaCanvas',
         width: window.innerWidth,
@@ -20,7 +21,7 @@
     //----- Ignore everything above here for now -----//
 
     // The data structure to hold the state of the game
-    gameData = {
+    let gameData = {
         backgroundColor: "lightblue",
         player: {
             name: "Dave",
