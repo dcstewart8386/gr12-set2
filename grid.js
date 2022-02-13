@@ -1,6 +1,6 @@
 // This file is used to add the grid to the canvas to facilitate development.
 // Feel free to play around with this file to change the look of the grid. If
-// needed, a fresh copy and be downloaded from GitHub.
+// needed, a fresh copy can be downloaded from GitHub.
 function addGrid(Konva, layer) {
 
     // Draw vertical lines and labels

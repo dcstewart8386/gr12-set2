@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
+<title>Konva Program</title>
+</head>
+<body>
+<div id="konvaCanvas"></div>
+<script>
+	
+    let stage = new Konva.Stage({
+        container: 'konvaCanvas',
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    let layer = new Konva.Layer();
+	stage.add(layer); // add the layer to the stage
+
+    //----- Ignore everything above here for now -----//
+
+    // The data structure to hold the state of the game
+    gameData = {
+        backgroundColor: "lightblue",
+        player: {
+            name: "Dave",
+            lives: 3,
+            x: 150,
+            y: 200
+        },
+        opponent: {
+            name: "Bad dude",
+            x: 300,
+            y: 100
+        }
+    }
+
+    // ---- The rendering begins here ----- //
+
+    addGrid(Konva, layer); // comment this line to remove the grid
+
+    // A rectangle to represent the background
+    var background = new Konva.Rect({
+        x: 0,
+        y: 0,
+        opacity: 0.5, // allows us to see the grid underneat
+        width: stage.width(),
+        height: stage.height(),
+        fill: gameData.backgroundColor,
+    });
+    layer.add(background);
+
+    // The circle to represent the player
+    let circle = new Konva.Circle({
+        x: gameData.player.x,
+        y: gameData.player.y,
+        radius: 20,
+        fill: 'blue',
+        stroke: 'black',
+        strokeWidth: 4,
+    });
+    layer.add(circle); 
+  
+    // The player's label
+    var monsterText = new Konva.Text({
+            x: gameData.player.x - 20,
+            y: gameData.player.y - 40,
+            text: gameData.player.name,
+            fontSize: 20,
+            fontFamily: 'Calibri',
+            fill: 'black',
+        });
+    layer.add(monsterText);
+
+    // The opponent's image - images are a little tricky in Konva, and eventually we'll see exactly what's going
+    // on in this chunk of code. For now, you can use this as a template for your own images. Note that we actually
+    // require the use of two variable names here: I chose `monsterObj` and `monster`. Be careful not to mix these up.
+    var monsterObj = new Image();
+    monsterObj.onload = function () {
+        var monster = new Konva.Image({
+            x: gameData.opponent.x,
+            y: gameData.opponent.y,
+            image: monsterObj,
+        });
+        layer.add(monster);
+    };
+    monsterObj.src = 'red-monster.png';
+
+    // The opponent's label - this label is more advanced and requires a fair bit of code. It was adapted from
+    // the Label example in the Konva tutorial. There are some other interesting examples of labels on this page
+    // too which you might want to try out.
+    var labelLeft = new Konva.Label({
+        x: gameData.opponent.x + 90,
+        y: gameData.opponent.y + 40,
+        opacity: 0.75,
+    });
+
+    labelLeft.add(
+        new Konva.Tag({
+          fill: 'green',
+          pointerDirection: 'left',
+          pointerWidth: 20,
+          pointerHeight: 28,
+          lineJoin: 'round',
+        })
+    );
+
+    labelLeft.add(
+        new Konva.Text({
+          text: gameData.opponent.name,
+          fontFamily: 'Calibri',
+          fontSize: 18,
+          padding: 5,
+          fill: 'white',
+        })
+    );
+    layer.add(labelLeft)
+
+
+    // The hearts representing the player's lives. The way I've implemented requires the JavaScript `for` loop,
+    // which we will be looking at formally in the next assignment. You are not required to use this technique in
+    // your own rendering. Feel free to just display the number of lives using text instead if you'd like.
+    var heartObj = new Image();
+    heartObj.onload = function () {
+        for (let i = 0; i < gameData.player.lives; i++) {
+
+            var heart = new Konva.Image({
+                x: 50 + i*40,
+                y: 5,
+                image: heartObj,
+                scaleX: 0.3,
+                scaleY: 0.3
+            });
+            layer.add(heart);
+        }
+    };
+    heartObj.src = 'heart.png';
+
+    //----- Ignore everything below here for now -----//
+
+</script>
+</body>
+</html>
