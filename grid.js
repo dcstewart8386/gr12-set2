@@ -3,6 +3,7 @@
 // needed, a fresh copy and be downloaded from GitHub.
 function addGrid(Konva, layer) {
 
+    // Draw vertical lines and labels
     for (i = 50; i <= layer.width(); i += 50) {
         let line = new Konva.Line({
             points: [i, 0, i, layer.height()],
@@ -21,6 +22,7 @@ function addGrid(Konva, layer) {
         layer.add(text)
     }
 
+    // Draw horizontal lines and labels
     for (i = 50; i <= layer.height(); i += 50) {
         let line = new Konva.Line({
             points: [0, i, layer.width(), i],
