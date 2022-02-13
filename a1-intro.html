@@ -2,12 +2,13 @@
 <html>
 <head>
 <script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
 <title>Intro to Konva</title>
 </head>
 <body>
 <div id="konvaCanvas"></div>
 <script>
-	
+
     let stage = new Konva.Stage({
         container: 'konvaCanvas',
         width: window.innerWidth,
@@ -15,11 +16,12 @@
     });
     let layer = new Konva.Layer();
 	stage.add(layer); // add the layer to the stage
+    addGrid(Konva, layer);
 
     //----- Ignore everything above here for now -----//
 
-	// A sample shape to get you started
-	// Free free to change or delete this circle
+    // A sample shape to get you started
+    // Free free to change or delete this circle
     let circle = new Konva.Circle({
         x: 100,
         y: 100,
@@ -31,7 +33,7 @@
     layer.add(circle); // add the shape to the layer
   
   
-	//----- Begin adding your own shapes here -----//
+    //----- Begin adding your own shapes here -----//
   
 
     //----- Ignore everything below here for now -----//
