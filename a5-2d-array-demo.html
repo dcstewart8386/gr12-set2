@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
+<title>Konva Program</title>
+</head>
+<body>
+<div id="konvaCanvas"></div>
+<script>
+	'use strict'
+
+    let stage = new Konva.Stage({
+        container: 'konvaCanvas',
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    let layer = new Konva.Layer();
+	stage.add(layer); // add the layer to the stage
+
+    //----- Ignore everything above here for now -----//
+
+     let gameData = {
+        // 0 represents vacant square
+        // 1 represents X occupied square
+        // 2 represents O occupied square
+        board: [
+            [0, 1, 2],
+            [0, 1, 1],
+            [1, 2, 2]
+        ]
+    }
+
+    // ---- The rendering begins here ----- //
+
+    // addGrid(Konva, layer) // uncomment to see the grid
+    addLines() // calls a function to add the lines of the board
+
+    // Go through the 2D array
+    for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+
+            // If we have a 1 in our data structure here, we need an X in our rendering
+            if (gameData.board[row][col] == 1) {
+                addX(row, col)
+            }
+
+            // If we have a 2 in our data structure here, we need an O in our rendering
+            if (gameData.board[row][col] == 2) {
+                addO(row, col)
+            }
+        }
+    }
+
+    function addLines() {
+        var line1 = new Konva.Line({
+            points: [0, 100, 300, 100],
+            stroke: 'blue',
+            strokeWidth: 5
+        });
+        layer.add(line1)
+
+        var line2 = new Konva.Line({
+            points: [0, 200, 300, 200],
+            stroke: 'blue',
+            strokeWidth: 5
+        });
+        layer.add(line2)
+
+        var line3 = new Konva.Line({
+            points: [100, 0, 100, 300],
+            stroke: 'blue',
+            strokeWidth: 5
+        });
+        layer.add(line3)
+
+        var line4 = new Konva.Line({
+            points: [200, 0, 200, 300],
+            stroke: 'blue',
+            strokeWidth: 5
+        });
+        layer.add(line4)
+    }
+
+    function addX(row, col) {
+        // Convert row and col to x and y coordinates
+        let x = col*100 + 25
+        let y = row*100 + 10
+
+        // Render the text
+        let  text = new Konva.Text({
+            x: x,
+            y: y,
+            text: 'X',
+            fontSize: 90,
+            fontFamily: 'Calibri',
+            fill: 'green',
+        })
+        layer.add(text)
+    }
+
+    function addO(row, col) {
+        // Convert row and col to x and y coordinates
+        let x = col*100 + 20
+        let y = row*100 + 10
+
+        // Render the text
+        let  text = new Konva.Text({
+            x: x,
+            y: y,
+            text: 'O',
+            fontSize: 90,
+            fontFamily: 'Calibri',
+            fill: 'red',
+        })
+        layer.add(text)
+    }
+
+
+    //----- Ignore everything below here for now -----//
+
+</script>
+</body>
+</html>
