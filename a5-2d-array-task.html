@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://unpkg.com/konva@8.3.2/konva.min.js"></script>
+<script src="grid.js"></script>
+<title>Checkers</title>
+</head>
+<body>
+<div id="konvaCanvas"></div>
+<script>
+	'use strict'
+
+    let stage = new Konva.Stage({
+        container: 'konvaCanvas',
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    let layer = new Konva.Layer();
+	stage.add(layer); // add the layer to the stage
+
+    //----- Ignore everything above here for now -----//
+
+     let gameData = {
+        // 0 represents vacant square
+        // 1 represents red occupied square
+        // 2 represents black occupied square
+        board: [
+            [0, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 0, 1, 0],
+            [0, 1, 0, 1, 0, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [2, 0, 2, 0, 2, 0, 2, 0],
+            [0, 2, 0, 2, 0, 2, 0, 2],
+            [2, 0, 2, 0, 2, 0, 2, 0]
+        ]
+    }
+
+    // ---- The rendering begins here ----- //
+
+    // addGrid(Konva, layer) // uncomment to see the grid
+    drawBoard() // calls a function to draw the game board
+
+    // Add code here to draw the game pieces
+
+
+
+    function drawBoard() {
+        // Draw each of the squares
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                let color = "white"
+
+                // If the row and column add to an even number, make the square gray
+                if ((row + col) % 2 == 0) 
+                    color = "gray"
+                
+                let square = new Konva.Rect({
+                    x: col*50+50,
+                    y: row*50+50,
+                    width: 50,
+                    height: 50,
+                    fill: color
+                })
+                layer.add(square)
+            }
+        }
+
+        // Draw a border
+        let border = new Konva.Rect({
+            x: 50,
+            y: 50,
+            width: 400,
+            height: 400,
+            stroke: 'black',
+            strokeWidth: 4
+        })
+        layer.add(border)
+    }
+
+
+
+
+    //----- Ignore everything below here for now -----//
+
+</script>
+</body>
+</html>
